@@ -27,11 +27,11 @@
                   </el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
-<!--              <el-menu-item-group>-->
-<!--                <el-menu-item  @click="addTab(childmenu.name,childmenu.linkUrl)" :index="childmenu.id+''" v-for="childmenu in parentmenu.childMenu">-->
-<!--                  <i :class="childmenu.iconUrl"></i>{{childmenu.name}}-->
-<!--                </el-menu-item>-->
-<!--              </el-menu-item-group>-->
+              <!--              <el-menu-item-group>-->
+              <!--                <el-menu-item  @click="addTab(childmenu.name,childmenu.linkUrl)" :index="childmenu.id+''" v-for="childmenu in parentmenu.childMenu">-->
+              <!--                  <i :class="childmenu.iconUrl"></i>{{childmenu.name}}-->
+              <!--                </el-menu-item>-->
+              <!--              </el-menu-item-group>-->
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -50,6 +50,7 @@
       </el-container>
     </el-container>
   </div>
+
 </template>
 
 <script>
@@ -58,8 +59,9 @@
   import Welcome from "./components/Welcome";
   import Manufactrue from "./components/Manufactrue";
   import Product from "./components/Product";
+  import Applyregister from "./components/Applyregister";
 
-export default {
+  export default {
   name: 'app',
   data () {
     return {
@@ -73,53 +75,53 @@ export default {
       tabIndex: 1   // 设置到name属性的值
     };
   },
-  methods:{
-    getmenudata(){
-      this.$axios.get("queryAllmenu").then(response=>{
-        this.menutable = response.data;
-      }).catch();
-    },
-    addTab(titlename,linkUrl){
-      //判断当前页面是否存在
-      var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
-      //存在
+    methods:{
+      getmenudata(){
+        this.$axios.get("queryAllmenu").then(response=>{
+          this.menutable = response.data;
+        }).catch();
+      },
+      addTab(titlename,linkUrl){
+        //判断当前页面是否存在
+        var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
+        //存在
 
-      if(tempobj!=undefined){
-        console.log(tempobj.name)
-        this.editableTabsValue = tempobj.name;
-      }else{
-        let newTabName = ++this.tabIndex+'';
-        this.editableTabs.push({
-          title: titlename,
-          name: newTabName,
-          content: linkUrl
-        });
-        this.editableTabsValue = newTabName;
+        if(tempobj!=undefined){
+          console.log(tempobj.name)
+          this.editableTabsValue = tempobj.name;
+        }else{
+          let newTabName = ++this.tabIndex+'';
+          this.editableTabs.push({
+            title: titlename,
+            name: newTabName,
+            content: linkUrl
+          });
+          this.editableTabsValue = newTabName;
+        }
+      },
+      removeTab(targetName){
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
+        if(activeName==targetName){
+          tabs.forEach((tab,index)=>{
+            if(tab.name==targetName){
+              let nextTab = tabs[index+1] || tabs[index-1];
+              if(nextTab){
+                activeName = nextTab.name;
+              }
+            }
+          });
+      }
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab=>tab.name != targetName);
       }
     },
-    removeTab(targetName){
-      let tabs = this.editableTabs;
-      let activeName = this.editableTabsValue;
-      if(activeName==targetName){
-        tabs.forEach((tab,index)=>{
-          if(tab.name==targetName){
-            let nextTab = tabs[index+1] || tabs[index-1];
-            if(nextTab){
-              activeName = nextTab.name;
-            }
-          }
-        });
-      }
-      this.editableTabsValue = activeName;
-      this.editableTabs = tabs.filter(tab=>tab.name != targetName);
+    created() {
+      this.getmenudata();
+    },
+    components: {
+      Inventory,Manufactrue,Product,Welcome,Applyregister
     }
-  },
-  created() {
-    this.getmenudata();
-  },
-  components: {
-    Inventory,Manufactrue,Product,Welcome
-  }
 }
 </script>
 
