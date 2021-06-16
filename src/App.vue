@@ -59,6 +59,7 @@
   import Manufactrue from "./components/Manufactrue";
   import Product from "./components/Product";
   import Record from "./components/Record";
+  import Applyregister from "./components/Applyregister";
 
 export default {
   name: 'app',
@@ -119,7 +120,7 @@ export default {
     this.getmenudata();
   },
   components: {
-    Inventory,Manufactrue,Product,Welcome,Record
+    Inventory,Manufactrue,Product,Welcome,Record,Applyregister
   }
 }
 </script>
