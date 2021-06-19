@@ -60,6 +60,7 @@
   import Product from "./components/Product";
   import Record from "./components/Record";
   import Applyregister from "./components/Applyregister";
+  import Recheck from "./components/Recheck";
 
 export default {
   name: 'app',
@@ -120,7 +121,7 @@ export default {
     this.getmenudata();
   },
   components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister
+    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,Recheck
   }
 }
 </script>
