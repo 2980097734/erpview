@@ -27,11 +27,11 @@
                   </el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
-<!--              <el-menu-item-group>-->
-<!--                <el-menu-item  @click="addTab(childmenu.name,childmenu.linkUrl)" :index="childmenu.id+''" v-for="childmenu in parentmenu.childMenu">-->
-<!--                  <i :class="childmenu.iconUrl"></i>{{childmenu.name}}-->
-<!--                </el-menu-item>-->
-<!--              </el-menu-item-group>-->
+              <!--              <el-menu-item-group>-->
+              <!--                <el-menu-item  @click="addTab(childmenu.name,childmenu.linkUrl)" :index="childmenu.id+''" v-for="childmenu in parentmenu.childMenu">-->
+              <!--                  <i :class="childmenu.iconUrl"></i>{{childmenu.name}}-->
+              <!--                </el-menu-item>-->
+              <!--              </el-menu-item-group>-->
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -53,74 +53,72 @@
 </template>
 
 <script>
-
   import Inventory from "./components/Inventory";
   import Welcome from "./components/Welcome";
   import Manufactrue from "./components/Manufactrue";
   import Product from "./components/Product";
-
-export default {
-  name: 'app',
-  data () {
-    return {
-      menutable:[],
-      editableTabsValue: '1',
-      editableTabs: [{   //tab选项卡显示的数据内容
-        title: '首页',
-        name: '1',
-        content: 'Welcome'
-      }],
-      tabIndex: 1   // 设置到name属性的值
-    };
-  },
-  methods:{
-    getmenudata(){
-      this.$axios.get("queryAllmenu").then(response=>{
-        this.menutable = response.data;
-      }).catch();
+  import CreateMaterial from "./components/CreateMaterial"
+  export default {
+    name: 'app',
+    data () {
+      return {
+        menutable:[],
+        editableTabsValue: '1',
+        editableTabs: [{   //tab选项卡显示的数据内容
+          title: '首页',
+          name: '1',
+          content: 'Welcome'
+        }],
+        tabIndex: 1   // 设置到name属性的值
+      };
     },
-    addTab(titlename,linkUrl){
-      //判断当前页面是否存在
-      var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
-      //存在
-
-      if(tempobj!=undefined){
-        console.log(tempobj.name)
-        this.editableTabsValue = tempobj.name;
-      }else{
-        let newTabName = ++this.tabIndex+'';
-        this.editableTabs.push({
-          title: titlename,
-          name: newTabName,
-          content: linkUrl
-        });
-        this.editableTabsValue = newTabName;
-      }
-    },
-    removeTab(targetName){
-      let tabs = this.editableTabs;
-      let activeName = this.editableTabsValue;
-      if(activeName==targetName){
-        tabs.forEach((tab,index)=>{
-          if(tab.name==targetName){
-            let nextTab = tabs[index+1] || tabs[index-1];
-            if(nextTab){
-              activeName = nextTab.name;
+    methods:{
+      getmenudata(){
+        this.$axios.get("queryAllmenu").then(response=>{
+          this.menutable = response.data;
+        }).catch();
+      },
+      addTab(titlename,linkUrl){
+        //判断当前页面是否存在
+        var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
+        //存在
+        if(tempobj!=undefined){
+          console.log(tempobj.name)
+          this.editableTabsValue = tempobj.name;
+        }else{
+          let newTabName = ++this.tabIndex+'';
+          this.editableTabs.push({
+            title: titlename,
+            name: newTabName,
+            content: linkUrl
+          });
+          this.editableTabsValue = newTabName;
+        }
+      },
+      removeTab(targetName){
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
+        if(activeName==targetName){
+          tabs.forEach((tab,index)=>{
+            if(tab.name==targetName){
+              let nextTab = tabs[index+1] || tabs[index-1];
+              if(nextTab){
+                activeName = nextTab.name;
+              }
             }
-          }
-        });
+          });
+        }
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab=>tab.name != targetName);
       }
-      this.editableTabsValue = activeName;
-      this.editableTabs = tabs.filter(tab=>tab.name != targetName);
+    },
+    created() {
+      this.getmenudata();
+    },
+    components: {
+      Inventory,Manufactrue,Product,Welcome,CreateMaterial
     }
-  },
-  created() {
-    this.getmenudata();
-  },
-  components: {
-    Inventory,Manufactrue,Product,Welcome
   }
-}
 </script>
 
 <style>
@@ -131,5 +129,4 @@ export default {
     width: 100%;
     height: 100%;
   }
-
 </style>
