@@ -196,6 +196,15 @@
         var _this =this;
         //组装数据(普通数据+特殊文件)   formData  html5提供的类型
         var params = new FormData();
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        var h = date.getHours();
+        var min = date.getMinutes();
+        var s = date.getSeconds();
+        this.addform.registerTime =
+          y+ '-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(s<10?('0'+s):s);
         Object.keys(this.addform).forEach((item)=>{
           params.append(item,this.addform[item]);
         })
