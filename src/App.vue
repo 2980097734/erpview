@@ -60,6 +60,8 @@
   import Product from "./components/Product";
   import Record from "./components/Record";
   import Applyregister from "./components/Applyregister";
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
 
 export default {
   name: 'app',
@@ -120,7 +122,7 @@ export default {
     this.getmenudata();
   },
   components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister
+    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,ApplySelect,Applyauditing
   }
 }
 </script>
