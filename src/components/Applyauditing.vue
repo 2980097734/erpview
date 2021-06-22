@@ -41,9 +41,9 @@
           <el-input v-model="auditingData.id" disabled></el-input>
         </el-form-item>
         <el-form-item label="计划编号">
-          <el-input style="width: 200px" v-model="auditingData.applyId"></el-input>
+          <el-input style="width: 200px" v-model="auditingData.applyId" disabled></el-input>
           <span>产品编号</span>
-          <el-input style="width: 200px" v-model="auditingData.productId"></el-input>
+          <el-input style="width: 200px" v-model="auditingData.productId" disabled></el-input>
         </el-form-item>
         <el-form-item label="产品名称">
           <el-input style="width: 200px" v-model="auditingData.productName"></el-input>
@@ -69,7 +69,7 @@
             v-model="auditingData.registerTime"
             style="width: 200px"
             type="datetime"
-            dataformatas="yyyy-MM-dd">
+            dataformatas="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="复核人">
@@ -82,7 +82,7 @@
           <el-date-picker
             v-model="auditingData.checkTime"
             type="datetime"
-            dataformatas="yyyy-MM-dd">
+            dataformatas="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="审核标志">
@@ -95,7 +95,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="派工标志">
+        <el-form-item label="派工标志" hidden>
           <el-select v-model="auditingData.manufactureTag" placeholder="请选择">
             <el-option
               v-for="item in options2"
@@ -186,18 +186,27 @@
             return "审核不通过"
           }
         },
-        btnupdate(id){
+        btnupdate(){
           this.updatewinshow = false;
           var _this = this;
           var params = new URLSearchParams();
+          var date = new Date();
+          var y = date.getFullYear();
+          var m = date.getMonth()+1;
+          var d = date.getDate();
+          var h = date.getHours();
+          var min = date.getMinutes();
+          var s = date.getSeconds();
+          this.auditingData.registerTime =
+            y+ '-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(s<10?('0'+s):s);
+          this.auditingData.checkTime =
+            y+ '-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(s<10?('0'+s):s);
           Object.keys(this.auditingData).forEach(function (item) {
-            if (_this.auditingData[item] != "" || _this.auditingData[item] != null){
-              if (_this.auditingData[item] != checkTime){
-                params.append(item,_this.auditingData[item]);
-              }
+            if (_this.auditingData[item] != "" && _this.auditingData[item] != null){
+              params.append(item,_this.auditingData[item]);
             }
           })
-          this.$axios.post("updateApply.action?id="+id,params).then(function (response) {
+          this.$axios.post("updateApply.action",params).then(function (response) {
             if (response.data == true) {
               _this.$notify({
                 title: '成功',
