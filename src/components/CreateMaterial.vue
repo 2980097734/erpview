@@ -125,118 +125,118 @@
           </el-popconfirm>
         </template>
       </el-button-group>
-      <el-form :model="fileOneData" status-icon label-width="180px" >
-        <h3>物料组成设计单</h3>
-        <!--<el-row :gutter="20" style="margin-top: 10px">
-          <el-col :span="5">
-            <div><strong>产品名称:</strong>{{fileOneData.productName}}</div>
-          </el-col>
-          <el-col :span="5">
-            <div><strong>产品编号:</strong>{{fileOneData.productId}}</div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20" style="margin-top: 10px" >
-          <el-col :span="2">
-            <el-form-item label="设计人">
-              <el-input clearable v-model="designer"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>-->
+        <el-form :model="fileOneData" status-icon label-width="180px" >
+          <h3>物料组成设计单</h3>
+          <!--<el-row :gutter="20" style="margin-top: 10px">
+            <el-col :span="5">
+              <div><strong>产品名称:</strong>{{fileOneData.productName}}</div>
+            </el-col>
+            <el-col :span="5">
+              <div><strong>产品编号:</strong>{{fileOneData.productId}}</div>
+            </el-col>
+          </el-row>
+          <el-row :gutter="20" style="margin-top: 10px" >
+            <el-col :span="2">
+              <el-form-item label="设计人">
+                <el-input clearable v-model="designer"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>-->
 
-        <el-row >
-          <el-col :span="10">
-            <el-form-item label="产品名称：">
-              <div>{{fileOneData.productName}}</div>
-            </el-form-item>
+          <el-row >
+            <el-col :span="10">
+              <el-form-item label="产品名称：">
+                <div>{{fileOneData.productName}}</div>
+              </el-form-item>
 
-          </el-col>
-          <el-col :span="10">
-            <el-form-item label="产品编号:">
-              <div>{{fileOneData.productId}}</div>
-            </el-form-item>
+            </el-col>
+            <el-col :span="10">
+              <el-form-item label="产品编号:">
+                <div>{{fileOneData.productId}}</div>
+              </el-form-item>
 
-          </el-col>
-        </el-row>
-        <el-row >
-          <el-col :span="10" >
-            <el-form-item label="设计人:">
-              <el-input clearable v-model="designer"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
+            </el-col>
+          </el-row>
+          <el-row >
+            <el-col :span="10" >
+              <el-form-item label="设计人:">
+                <el-input clearable v-model="designer"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
 
 
-       <el-table :data="moduleData"  :row-class-name="rowClassName"  @selection-change="xxx">
-         <el-table-column
-           type="selection"
-           width="55">
-         </el-table-column>
-          <el-table-column
-            prop="productId"
-            label="物料编号"
-            width="140">
-          </el-table-column>
-          <el-table-column
-            prop="productName"
-            label="物料名称"
-            width="140">
-          </el-table-column>
-          <el-table-column
-            prop="type"
-            label="用途类型"
-            width="140"
-            :formatter="typeFormatter">
-          </el-table-column>
-          <el-table-column
-            prop="productDescribe"
-            label="描述"
-            width="140">
-          </el-table-column>
-          <el-table-column
-            prop="amount"
-            label="数量"
-            width="140">
-            <template slot-scope="scope">
-              <el-input clearable v-model.number="scope.row.amount" @input="amountinput(scope.row)"></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="amountUnit"
-            label="单位"
-            width="140">
-          </el-table-column>
-          <el-table-column
-            prop="costPrice"
-            label="单价"
-            width="140">
-          </el-table-column>
-          <el-table-column
-            label="小计"
-            prop="subtotal"
-            width="140">
-          </el-table-column>
-        </el-table>
-        <el-row >
-          <el-col :span="10">
-            <el-form-item label="登记人:">
-              <div>{{fileOneData.register}}</div>
-            </el-form-item>
-          </el-col>
-          <el-col :span="10">
-            <el-form-item label="登记时间:">
-              <div>{{fileOneData.registerTime}}</div>
-            </el-form-item>
+         <el-table :data="moduleData"  :row-class-name="rowClassName"  @selection-change="xxx">
+           <el-table-column
+             type="selection"
+             width="55">
+           </el-table-column>
+            <el-table-column
+              prop="productId"
+              label="物料编号"
+              width="140">
+            </el-table-column>
+            <el-table-column
+              prop="productName"
+              label="物料名称"
+              width="140">
+            </el-table-column>
+            <el-table-column
+              prop="type"
+              label="用途类型"
+              width="140"
+              :formatter="typeFormatter">
+            </el-table-column>
+            <el-table-column
+              prop="productDescribe"
+              label="描述"
+              width="140">
+            </el-table-column>
+            <el-table-column
+              prop="amount"
+              label="数量"
+              width="140">
+              <template slot-scope="scope">
+                <el-input clearable v-model.number="scope.row.amount" @input="amountinput(scope.row)"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="amountUnit"
+              label="单位"
+              width="140">
+            </el-table-column>
+            <el-table-column
+              prop="costPrice"
+              label="单价"
+              width="140">
+            </el-table-column>
+            <el-table-column
+              label="小计"
+              prop="subtotal"
+              width="140">
+            </el-table-column>
+          </el-table>
+          <el-row >
+            <el-col :span="10">
+              <el-form-item label="登记人:">
+                <div>{{register}}</div>
+              </el-form-item>
+            </el-col>
+            <el-col :span="10">
+              <el-form-item label="登记时间:">
+                <div>{{timeText}}</div>
+              </el-form-item>
 
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="20">
-            <el-form-item label="设计要求">
-              <el-input type="textarea" v-model="moduleDescribe"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-   </el-form>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="20">
+              <el-form-item label="设计要求">
+                <el-input type="textarea" v-model="moduleDescribe"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+     </el-form>
     </div>
 
     <el-dialog title="物料" :visible.sync="dialogTableVisible" style="width:100%">
@@ -313,7 +313,9 @@
             search:"",
             dialogTableVisible:false,
             moduleDescribe:"",
-            delmod:[]
+            delmod:[],
+            timeText:"",
+            register:""
         }
       },
       methods:{
@@ -322,7 +324,7 @@
         },
         getfiledata(){
             var _this=this;
-            var params = new URLSearchParams(); 
+            var params = new URLSearchParams();
            /* params.append("firstKindId",this.form.firstKindId);
             params.append("secondKindId",this.form.secondKindId);
             params.append("thirdKindId",this.form.thirdKindId);
@@ -335,7 +337,7 @@
 
            })
             params.append("pageno",this.pageno);
-            params.append("pagesize",this.pagesize); 
+            params.append("pagesize",this.pagesize);
             this.$axios.post("ProductMaterial/queryAllFile1",params).then((response)=>{
                         this.fileData=response.data.records;
             }).catch();
@@ -348,6 +350,15 @@
                         this.show1=false;
                         this.show2=true;
             }).catch();
+              this.register=sessionStorage.getItem("user");
+          var date = new Date();
+          var y = date.getFullYear();
+          var m = date.getMonth()+1;
+          var d = date.getDate();
+          var h = date.getHours();
+          var min = date.getMinutes();
+          var s = date.getSeconds();
+          this.timeText=y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+'  '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(s<10?('0'+s):s);
         },
         handle(row){
             var xx=true;
@@ -432,20 +443,25 @@
           this.moduleData[0].goodsId=this.fileOneData.productId;
           this.moduleData[0].moduleDescribe=this.moduleDescribe;
           this.moduleData[0].designer=this.designer;
-          console.log(this.moduleData)
+          this.moduleData[0].register=this.register;
+          this.moduleData[0].registerTime=this.timeText;
           this.$axios.post("ProductMaterial/addModule",JSON.stringify(this.moduleData),
             {headers:{"Content-Type":"application/json"}}).then((response)=>{
               this.$message({
                 message: '提交成功，等待审核',
                 type: 'success'
               });
-                  this.moduleData=[];
-                  this.designer="";
-                  this.moduleDescribe="";
+            this.getfiledata();
                   this.showqq();
           })
         },
         showqq(){
+          this.moduleData=[];
+          this.register="";
+          this.timeText="";
+          this.fileOneData={};
+          this.designer="";
+          this.moduleDescribe="";
             this.show1=true;
             this.show2=false;
         },

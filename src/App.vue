@@ -61,70 +61,11 @@
   import Applyregister from "./components/Applyregister";
   import ApplySelect from "./components/ApplySelect";
   import Applyauditing from "./components/Applyauditing";
-
-export default {
-  name: 'app',
-  data () {
-    return {
-      menutable:[],
-      editableTabsValue: '1',
-      editableTabs: [{   //tab选项卡显示的数据内容
-        title: '首页',
-        name: '1',
-        content: 'Welcome'
-      }],
-      tabIndex: 1   // 设置到name属性的值
-    };
-  },
-  methods:{
-    getmenudata(){
-      this.$axios.get("queryAllmenu").then(response=>{
-        this.menutable = response.data;
-      }).catch();
-    },
-    addTab(titlename,linkUrl){
-      //判断当前页面是否存在
-      var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
-      //存在
-
-      if(tempobj!=undefined){
-        console.log(tempobj.name)
-        this.editableTabsValue = tempobj.name;
-      }else{
-        let newTabName = ++this.tabIndex+'';
-        this.editableTabs.push({
-          title: titlename,
-          name: newTabName,
-          content: linkUrl
-        });
-        this.editableTabsValue = newTabName;
-      }
-    },
-    removeTab(targetName){
-      let tabs = this.editableTabs;
-      let activeName = this.editableTabsValue;
-      if(activeName==targetName){
-        tabs.forEach((tab,index)=>{
-          if(tab.name==targetName){
-            let nextTab = tabs[index+1] || tabs[index-1];
-            if(nextTab){
-              activeName = nextTab.name;
-            }
-          }
-        });
-      }
-      this.editableTabsValue = activeName;
-      this.editableTabs = tabs.filter(tab=>tab.name != targetName);
-    }
-  },
-  created() {
-    this.getmenudata();
-  },
-  components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,Applyauditing,ApplySelect
-  }
-}
   import CreateMaterial from "./components/CreateMaterial"
+  import wuliaoshenhe from "./components/wuliaoshenhe";
+  import wuliaochaxun from "./components/wuliaochaxun"
+  import wuliaogenggai from "./components/wuliaogenggai"
+
   export default {
     name: 'app',
     data () {
@@ -144,6 +85,10 @@ export default {
         this.$axios.get("queryAllmenu").then(response=>{
           this.menutable = response.data;
         }).catch();
+        this.$axios.post("queryUser").then((response)=>{
+          var user = response.data;
+            sessionStorage.setItem("user",user);
+        })
       },
       addTab(titlename,linkUrl){
         //判断当前页面是否存在
@@ -183,7 +128,8 @@ export default {
       this.getmenudata();
     },
     components: {
-      Inventory,Manufactrue,Product,Welcome,CreateMaterial
+      Inventory,Manufactrue,Product,Welcome,CreateMaterial,Record,Applyregister,Applyauditing,ApplySelect,wuliaoshenhe,
+      wuliaochaxun,wuliaogenggai
     }
   }
 </script>
