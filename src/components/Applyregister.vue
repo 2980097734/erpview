@@ -43,20 +43,56 @@
     <!--  添加动态模态框-->
     <el-dialog title="新发生生产计划添加" :visible="addwinshow">
       <el-form label-width="80px" :modal="addform">
-        <el-form-item label="计划编号">
-          <el-input clearable v-model="addform.applyId"></el-input>
+        <el-form-item label="编号" hidden>
+          <el-input v-model="addform.id"></el-input>
         </el-form-item>
-        <el-form-item label="产品编号">
-          <el-input clearable v-model="addform.productId"></el-input>
+        <el-form-item label="计划编号">
+          <el-input style="width: 200px" v-model="addform.applyId"></el-input>
+          <span>产品编号</span>
+          <el-input style="width: 200px" v-model="addform.productId"></el-input>
         </el-form-item>
         <el-form-item label="产品名称">
-          <el-input clearable v-model="addform.productName"></el-input>
+          <el-input style="width: 200px" v-model="addform.productName"></el-input>
+          <span>产品数量</span>
+          <el-input style="width: 200px;" v-model="addform.amount"></el-input>
         </el-form-item>
-        <el-form-item label="产品数量">
-          <el-input clearable v-model="addform.amount"></el-input>
+        <el-form-item label="设计人">
+          <el-input style="width: 200px;" v-model="addform.designer"></el-input>
+        </el-form-item>
+        <el-form-item label="产品描述">
+          <el-input v-model="addform.productDescribe"></el-input>
+        </el-form-item>
+        <el-form-item label="产品类型">
+          <el-input v-model="addform.type"></el-input>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input v-model="addform.remark"></el-input>
+        </el-form-item>
+        <el-form-item label="登记人">
+          <el-input style="width: 200px" v-model="addform.register"></el-input>
+          <span>登记时间</span>
+          <el-date-picker
+            v-model="addform.registerTime"
+            style="width: 200px"
+            type="datetime"
+            dataformatas="yyyy-MM-dd">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="复核人" hidden>
+          <el-input style="width: 200px" v-model="addform.checker"></el-input>
+        </el-form-item>
+        <el-form-item label="审核意见" hidden>
+          <el-input v-model="addform.checkSuggestion"></el-input>
+        </el-form-item>
+        <el-form-item label="审核时间" hidden>
+          <el-date-picker
+            v-model="addform.checkTime"
+            type="datetime"
+            dataformatas="yyyy-MM-dd">
+          </el-date-picker>
         </el-form-item>
         <el-form-item label="审核标志">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="addform.checkTag" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -66,7 +102,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="派工标志">
-          <el-select v-model="value2" placeholder="请选择">
+          <el-select v-model="addform.manufactureTag" placeholder="请选择">
             <el-option
               v-for="item in options2"
               :key="item.value2"
@@ -93,10 +129,22 @@
         tableData:[],
         addwinshow:false,
         addform:{},
+        id:null,
         applyId:"",
         productId:"",
         productName:"",
+        productDescribe:"",
+        type:"",
         amount:"",
+        remark:"",
+        designer:"",
+        register:"",
+        registerTime:"",
+        checker:"",
+        checkSuggestion:"",
+        checkTime:"",
+        checkTag: "",
+        manufactureTag:"",
         options:[{
           value:'s001-0',
           label:'等待审核'
@@ -148,6 +196,15 @@
         var _this =this;
         //组装数据(普通数据+特殊文件)   formData  html5提供的类型
         var params = new FormData();
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        var h = date.getHours();
+        var min = date.getMinutes();
+        var s = date.getSeconds();
+        this.addform.registerTime =
+          y+ '-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(s<10?('0'+s):s);
         Object.keys(this.addform).forEach((item)=>{
           params.append(item,this.addform[item]);
         })
@@ -158,7 +215,7 @@
         this.$axios({
           method: 'post',
           url: 'addApply.action',
-          data: {params}
+          data: params
           // headers: {
           //   'Content-Type':'multipart/form-data'
           // }
