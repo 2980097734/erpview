@@ -77,7 +77,7 @@
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="I级分类" prop="firstKindId">
-                <el-select v-model="ruleForm.firstKindId" @change="getconfig1" placeholder="请选择分类">
+                <el-select v-model="ruleForm.firstKindId"  placeholder="请选择分类">
                   <el-option
                     v-for="items in config"
                     :key="items.kindId"
@@ -89,8 +89,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="II级分类" prop="secondKindId">
-                <el-select v-model="ruleForm.secondKindId" @change="getconfig2" placeholder="请选择分类">
-                  <!--            <el-option label="区域一" value="shanghai"></el-option>-->
+                <el-select v-model="ruleForm.secondKindId"  placeholder="请选择分类">
                   <el-option
                     v-for="items in config1"
                     :key="items.kindId"
@@ -103,7 +102,6 @@
             <el-col :span="8">
               <el-form-item label="III级分类" prop="thirdKindId">
                 <el-select v-model="ruleForm.thirdKindId" placeholder="请选择分类">
-                  <!--            <el-option label="区域一" value="shanghai"></el-option>-->
                   <el-option
                     v-for="items1 in config2"
                     :key="items1.kindId"
@@ -218,7 +216,7 @@
           </el-row>
         </el-form>
         <div class="demo-drawer__footer">
-          <el-button>取 消</el-button>
+          <el-button @click="dialog = false">取 消</el-button>
           <el-button type="primary" @click="btnsave">复核</el-button>
         </div>
       </div>
@@ -262,17 +260,22 @@
               this.tableData = response.data;
             }).catch();
           },
-          getdataConfig(){
-            this.$axios.post("queryconfig").then(response =>{
-              this.config = response.data;
-            }).catch();
-          },
           fuhe(id){
             this.dialog = true
             var params = new URLSearchParams();
             params.append("id",id)
             this.$axios.post("queryById",params).then(response=>{
               this.ruleForm = response.data;
+
+              var temp = this.config.find((item)=>{
+                return item.kindId==this.ruleForm.firstKindId;
+              })
+              this.config1=temp.childConfig;
+
+              var temp = this.config1.find(item=>{
+                return item.kindId==this.ruleForm.secondKindId;
+              })
+              this.config2 = temp.childConfig;
             }).catch()
           },
           btnsave(){
@@ -307,17 +310,10 @@
               this.getcheckdata();
             })
           },
-          getconfig1(){
-            var temp = this.config.find((item)=>{
-              return item.kindId==this.ruleForm.firstKindId;
-            })
-            this.config1=temp.childConfig;
-          },
-          getconfig2(){
-            var temp = this.config1.find(item=>{
-              return item.kindId==this.ruleForm.secondKindId;
-            })
-            this.config2 = temp.childConfig;
+          getdataConfig(){
+            this.$axios.post("queryconfig").then(response =>{
+              this.config = response.data;
+            }).catch();
           },
           typeName(row){
             if(row.type=="Y001-1"){
@@ -331,6 +327,8 @@
       },
       created() {
           this.getcheckdata();
+          this.getdataConfig();
+
       }
     }
 </script>
