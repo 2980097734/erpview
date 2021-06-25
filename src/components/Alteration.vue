@@ -139,7 +139,7 @@
             <el-row :gutter="10">
               <el-col :span="8">
                 <el-form-item label="I级分类" prop="firstKindId">
-                  <el-select v-model="ruleForm1.firstKindId" @change="getconfig1" placeholder="请选择分类">
+                  <el-select v-model="ruleForm1.firstKindId" @change="getconfig11" placeholder="请选择分类">
                     <el-option
                       v-for="items in config"
                       :key="items.kindId"
@@ -151,7 +151,7 @@
               </el-col>
               <el-col :span="8">
                 <el-form-item label="II级分类" prop="secondKindId">
-                  <el-select v-model="ruleForm1.secondKindId" @change="getconfig2" placeholder="请选择分类">
+                  <el-select v-model="ruleForm1.secondKindId" @change="getconfig22" placeholder="请选择分类">
                     <el-option
                       v-for="items in config1"
                       :key="items.kindId"
@@ -181,7 +181,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="用途类型：">
+                <el-form-item label="用途类型">
                   <span v-if="ruleForm1.type=='Y001-1'">商品</span>
                   <span v-if="ruleForm1.type=='Y001-2'">物料</span>
                 </el-form-item>
@@ -316,13 +316,25 @@
       },
       getconfig1(){
         var temp = this.config.find((item)=>{
-          return item.kindId==this.ruleForm.firstKindId,item.kindId==this.ruleForm1.firstKindId;
+          return item.kindId==this.ruleForm.firstKindId;
         })
         this.config1=temp.childConfig;
       },
       getconfig2(){
         var temp = this.config1.find(item=>{
-          return item.kindId==this.ruleForm.secondKindId,item.kindId==this.ruleForm1.secondKindId;
+          return item.kindId==this.ruleForm.secondKindId;
+        })
+        this.config2 = temp.childConfig;
+      },
+      getconfig11(){
+        var temp = this.config.find((item)=>{
+          return item.kindId==this.ruleForm1.firstKindId;
+        })
+        this.config1=temp.childConfig;
+      },
+      getconfig22(){
+        var temp = this.config1.find(item=>{
+          return item.kindId==this.ruleForm1.secondKindId;
         })
         this.config2 = temp.childConfig;
       },
