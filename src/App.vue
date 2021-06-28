@@ -60,9 +60,12 @@
   import Product from "./components/Product";
   import Record from "./components/Record";
   import Applyregister from "./components/Applyregister";
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
+  import DoManufacture from "./components/DoManufacture";
+  import Alteration from "./components/Alteration";
   import Recheck from "./components/Recheck";
   import ProductQuery from "./components/ProductQuery";
-  import Alteration from "./components/Alteration";
 
 export default {
   name: 'app',
@@ -124,7 +127,7 @@ export default {
   },
   components: {
     Inventory,Manufactrue,Product,Welcome,Record,Applyregister,
-    Recheck,ProductQuery,Alteration
+    Recheck,ProductQuery,Alteration,ApplySelect,Applyauditing,DoManufacture
   }
 }
 </script>
