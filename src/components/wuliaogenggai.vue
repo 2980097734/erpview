@@ -407,7 +407,7 @@
           this.getfiledata();
         },
         typeFormatter(row){
-          return row.type=="Y001-1"?"商品":"物料";
+          return row.type=="1"?"商品":"物料";
         },
         amountinput(row){
           row.subtotal=row.amount*row.costPrice;

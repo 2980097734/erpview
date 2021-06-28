@@ -186,7 +186,7 @@
           }).catch();
         },
         typeFormatter(row){
-          return row.type=="Y001-1"?"商品":"物料";
+          return row.type=="1"?"商品":"物料";
         },
         searchcartype() {   //条件查询
           this.getfiledata();
@@ -240,12 +240,12 @@
           this.ModuleDetails=[];
         },
         designerFormatter(row){
-          return row.checkTag=="S001-1"?"完成":"等待"
+          return row.checkTag=="1"?"完成":"等待"
         },
         checkTagFormatter(row){
-          if (row.checkTag=="S001-1"){
+          if (row.checkTag=="1"){
             return "通过";
-          }else if (row.checkTag=="S001-2"){
+          }else if (row.checkTag=="2"){
             return "未通过"
           }
           return "等待";

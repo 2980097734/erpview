@@ -65,69 +65,14 @@
   import wuliaoshenhe from "./components/wuliaoshenhe";
   import wuliaochaxun from "./components/wuliaochaxun"
   import wuliaogenggai from "./components/wuliaogenggai"
-
-export default {
-  name: 'app',
-  data () {
-    return {
-      menutable:[],
-      editableTabsValue: '1',
-      editableTabs: [{   //tab选项卡显示的数据内容
-        title: '首页',
-        name: '1',
-        content: 'Welcome'
-      }],
-      tabIndex: 1   // 设置到name属性的值
-    };
-  },
-  methods:{
-    getmenudata(){
-      this.$axios.get("queryAllmenu").then(response=>{
-        this.menutable = response.data;
-      }).catch();
-    },
-    addTab(titlename,linkUrl){
-      //判断当前页面是否存在
-      var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
-      //存在
-
-      if(tempobj!=undefined){
-        console.log(tempobj.name)
-        this.editableTabsValue = tempobj.name;
-      }else{
-        let newTabName = ++this.tabIndex+'';
-        this.editableTabs.push({
-          title: titlename,
-          name: newTabName,
-          content: linkUrl
-        });
-        this.editableTabsValue = newTabName;
-      }
-    },
-    removeTab(targetName){
-      let tabs = this.editableTabs;
-      let activeName = this.editableTabsValue;
-      if(activeName==targetName){
-        tabs.forEach((tab,index)=>{
-          if(tab.name==targetName){
-            let nextTab = tabs[index+1] || tabs[index-1];
-            if(nextTab){
-              activeName = nextTab.name;
-            }
-          }
-        });
-      }
-      this.editableTabsValue = activeName;
-      this.editableTabs = tabs.filter(tab=>tab.name != targetName);
-    }
-  },
-  created() {
-    this.getmenudata();
-  },
-  components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,ApplySelect,Applyauditing
-  }
-}
+  import AddDesignProcedure from "./components/AddDesignProcedure"
+  import CheckDesignProcedure from "./components/CheckDesignProcedure"
+  import EditDesignProcedure from "./components/EditDesignProcedure"
+  import QueryDesignProcedure from "./components/QueryDesignProcedure"
+  import AddDesignProcedureModule from "./components/AddDesignProcedureModule"
+  import CheckDesignProcedureModule from "./components/CheckDesignProcedureModule"
+  import EditDesignProcedureModule from "./components/EditDesignProcedureModule"
+  import QueryDesignProcedureModule from "./components/QueryDesignProcedureModule"
   export default {
     name: 'app',
     data () {
@@ -144,10 +89,10 @@ export default {
     },
     methods:{
       getmenudata(){
-        this.$axios.get("queryAllmenu").then(response=>{
+        this.$axios.get("menu/queryAllmenu").then(response=>{
           this.menutable = response.data;
         }).catch();
-        this.$axios.post("queryUser").then((response)=>{
+        this.$axios.post("menu/queryUser").then((response)=>{
           var user = response.data;
             sessionStorage.setItem("user",user);
         })
@@ -191,7 +136,8 @@ export default {
     },
     components: {
       Inventory,Manufactrue,Product,Welcome,CreateMaterial,Record,Applyregister,Applyauditing,ApplySelect,wuliaoshenhe,
-      wuliaochaxun,wuliaogenggai
+      wuliaochaxun,wuliaogenggai,AddDesignProcedure,CheckDesignProcedure,EditDesignProcedure,QueryDesignProcedure,
+      AddDesignProcedureModule,CheckDesignProcedureModule,EditDesignProcedureModule,QueryDesignProcedureModule
     }
   }
 </script>

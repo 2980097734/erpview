@@ -268,8 +268,6 @@
           show1: true,
           show2: false,
           ModuleDetails: [],
-          checkTime: "",
-          checker: "",
           onedata:[],
           twodata:[],
           threedata:[]
@@ -297,7 +295,7 @@
           this.ModuleOneData={};
         },
         typeFormatter(row){
-          return row.type=="Y001-1"?"商品":"物料";
+          return row.type=="1"?"商品":"物料";
         },
         searchcartype() {   //条件查询
           this.getfiledata();
@@ -359,9 +357,9 @@
         },
         tijiao() {
           if (this.radio=="1"){
-            this.ModuleOneData.checkTag="S001-2";
+            this.ModuleOneData.checkTag="2";
           }else {
-            this.ModuleOneData.checkTag="S001-1";
+            this.ModuleOneData.checkTag="1";
           }
           var params = new URLSearchParams();
           Object.keys(this.ModuleOneData).forEach((item) => {
