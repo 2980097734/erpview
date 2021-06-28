@@ -7,11 +7,13 @@
       <el-table-column
         fixed
         prop="applyId"
-        label="生产计划编号">
+        label="生产计划编号"
+      width="150px">
       </el-table-column>
       <el-table-column
         prop="productId"
-        label="产品编号">
+        label="产品编号"
+      width="150px">
       </el-table-column>
       <el-table-column
         prop="productName"
@@ -138,20 +140,20 @@
             checkTag: "",
             manufactureTag:"",
             options:[{
-              value:'s001-0',
+              value:'0',
               label:'等待审核'
             },{
-              value: 's001-1',
+              value: '1',
               label: '审核通过'
             },{
-              value: 's001-2',
+              value: '2',
               label: '审核未通过'
             }],
             options2:[{
-              value2:'p001-0',
+              value2:'0',
               label2:'未派工'
             },{
-              value2: 'p001-1',
+              value2: '1',
               label2: '已派工'
             }],
             value:"",
@@ -176,13 +178,13 @@
           }).catch();
         },
         auditing(row){
-          if (row.checkTag=="s001-0"){
+          if (row.checkTag=="0"){
             return "等待审核"
           }
-          if (row.checkTag=="s001-1"){
+          if (row.checkTag=="1"){
             return "审核通过"
           }
-          if (row.checkTag=="s001-2"){
+          if (row.checkTag=="2"){
             return "审核不通过"
           }
         },

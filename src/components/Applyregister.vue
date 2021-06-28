@@ -1,6 +1,6 @@
 <template>
   <div id="Applyregister">
-    <el-button type="primary" @click="addwinshow=true">添加新发生生产计划</el-button>
+    <!--<el-button type="primary" @click="addwinshow=true">添加新发生生产计划</el-button>
     <el-table
       :data="tableData"
       border
@@ -14,7 +14,7 @@
       <el-table-column
         prop="productId"
         label="产品编号"
-        width="120">
+        width="150">
       </el-table-column>
       <el-table-column
         prop="productName"
@@ -38,23 +38,21 @@
         width="300"
         :formatter="dispatching">
       </el-table-column>
-    </el-table>
-
+    </el-table>-->
+    <span>新发生生产计划登记</span><br/>
     <!--  添加动态模态框-->
-    <el-dialog title="新发生生产计划添加" :visible="addwinshow">
+    <!--<el-dialog title="新发生生产计划添加" :visible="addwinshow">-->
       <el-form label-width="80px" :modal="addform">
         <el-form-item label="编号" hidden>
           <el-input v-model="addform.id"></el-input>
         </el-form-item>
-        <el-form-item label="计划编号">
-          <el-input style="width: 200px" v-model="addform.applyId"></el-input>
-          <span>产品编号</span>
+        <el-form-item label="产品编号">
           <el-input style="width: 200px" v-model="addform.productId"></el-input>
         </el-form-item>
         <el-form-item label="产品名称">
           <el-input style="width: 200px" v-model="addform.productName"></el-input>
           <span>产品数量</span>
-          <el-input style="width: 200px;" v-model="addform.amount"></el-input>
+          <el-input style="width: 200px" v-model="addform.amount"></el-input>
         </el-form-item>
         <el-form-item label="设计人">
           <el-input style="width: 200px;" v-model="addform.designer"></el-input>
@@ -91,8 +89,8 @@
             dataformatas="yyyy-MM-dd">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="审核标志">
-          <el-select v-model="addform.checkTag" placeholder="请选择">
+        <el-form-item label="审核标志" hidden>
+          <el-select style="width: 200px;" v-model="addform.checkTag" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -100,9 +98,8 @@
               :value="item.value">
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="派工标志">
-          <el-select v-model="addform.manufactureTag" placeholder="请选择">
+          <span>派工标志</span>
+          <el-select style="width: 200px" v-model="addform.manufactureTag" placeholder="请选择">
             <el-option
               v-for="item in options2"
               :key="item.value2"
@@ -111,12 +108,15 @@
             </el-option>
           </el-select>
         </el-form-item>
+<!--        <el-form-item label="派工标志">-->
+<!--          -->
+<!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addwinshow = false">取 消</el-button>
         <el-button type="primary" @click="btnadd">确 定</el-button>
       </div>
-    </el-dialog>
+    <!--</el-dialog>-->
 
   </div>
 </template>
@@ -146,20 +146,20 @@
         checkTag: "",
         manufactureTag:"",
         options:[{
-          value:'s001-0',
+          value:'0',
           label:'等待审核'
         },{
-          value: 's001-1',
+          value: '1',
           label: '审核通过'
         },{
-          value: 's001-2',
+          value: '2',
           label: '审核未通过'
         }],
         options2:[{
-          value2:'p001-0',
+          value2:'0',
           label2:'未派工'
         },{
-          value2: 'p001-1',
+          value2: '1',
           label2: '已派工'
         }],
         value:"",
@@ -168,26 +168,26 @@
     },
     methods:{
       getApplyData(){
-          this.$axios.get("queryAllApply.action").then((response)=>{
+          this.$axios.get("queryFile.action").then((response)=>{
             this.tableData = response.data;
           }).catch();
         },
       auditing(row){
-          if (row.checkTag=="s001-0"){
+          if (row.checkTag=="0"){
             return "等待审核"
           }
-          if (row.checkTag=="s001-1"){
+          if (row.checkTag=="1"){
             return "审核通过"
           }
-          if (row.checkTag=="s001-2"){
+          if (row.checkTag=="2"){
             return "审核不通过"
           }
       },
       dispatching(row){
-          if (row.manufactureTag=="p001-0"){
+          if (row.manufactureTag=="0"){
             return "未派工"
           }
-          if (row.manufactureTag=="p001-1"){
+          if (row.manufactureTag=="1"){
             return "已派工"
           }
       },

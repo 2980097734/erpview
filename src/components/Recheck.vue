@@ -56,28 +56,28 @@
       ref="drawer"
     >
       <div class="demo-drawer__content">
-        <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm" :rules="dateRule">
+        <el-form :model="ruleForm1" ref="ruleForm" label-width="100px" class="demo-ruleForm" :rules="dateRule">
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="产品名称" prop="productName">
-                <el-input v-model="ruleForm.productName"></el-input>
+                <el-input v-model="ruleForm1.productName"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="制造商" prop="factoryName">
-                <el-input v-model="ruleForm.factoryName"></el-input>
+                <el-input v-model="ruleForm1.factoryName"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="市场单价" prop="listPrice" label-width="100px">
-                <el-input v-model="ruleForm.listPrice"></el-input>
+                <el-input v-model="ruleForm1.listPrice"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="I级分类" prop="firstKindId">
-                <el-select v-model="ruleForm.firstKindId"  placeholder="请选择分类">
+                <el-select v-model="ruleForm1.firstKindId" @change="getconfig1" placeholder="请选择分类">
                   <el-option
                     v-for="items in config"
                     :key="items.kindId"
@@ -89,7 +89,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="II级分类" prop="secondKindId">
-                <el-select v-model="ruleForm.secondKindId"  placeholder="请选择分类">
+                <el-select v-model="ruleForm1.secondKindId" @change="getconfig2" placeholder="请选择分类">
                   <el-option
                     v-for="items in config1"
                     :key="items.kindId"
@@ -101,7 +101,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="III级分类" prop="thirdKindId">
-                <el-select v-model="ruleForm.thirdKindId" placeholder="请选择分类">
+                <el-select v-model="ruleForm1.thirdKindId" placeholder="请选择分类">
                   <el-option
                     v-for="items1 in config2"
                     :key="items1.kindId"
@@ -115,12 +115,12 @@
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="产品简称" prop="productNick">
-                <el-input v-model="ruleForm.productNick"></el-input>
+                <el-input v-model="ruleForm1.productNick"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="用途类型" prop="type">
-                <el-select v-model="ruleForm.type" placeholder="请选择分类">
+                <el-select v-model="ruleForm1.type" placeholder="请选择分类">
                   <el-option v-for="ty in types"
                              :value="ty.value"
                              :label="ty.lable"></el-option>
@@ -129,7 +129,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="档次级别" prop="productClass">
-                <el-select v-model="ruleForm.productClass" placeholder="请选择分类">
+                <el-select v-model="ruleForm1.productClass" placeholder="请选择分类">
                   <el-option v-for="pro in productclass"
                              :value="pro.value"
                              :label="pro.lable"></el-option>
@@ -140,17 +140,17 @@
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="计量单位" prop="personalUnit">
-                <el-input v-model="ruleForm.personalUnit"></el-input>
+                <el-input v-model="ruleForm1.personalUnit"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="计量值" prop="personalValue">
-                <el-input v-model="ruleForm.personalValue"></el-input>
+                <el-input v-model="ruleForm1.personalValue"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="计划成本单价" label-width="150px" prop="costPrice">
-                <el-input v-model="ruleForm.costPrice"></el-input>
+                <el-input v-model="ruleForm1.costPrice"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -159,58 +159,58 @@
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="保修期" prop="warranty">
-                <el-input v-model="ruleForm.warranty"></el-input>
+                <el-input v-model="ruleForm1.warranty"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="替代品名称" prop="twinName">
-                <el-input v-model="ruleForm.twinName"></el-input>
+                <el-input v-model="ruleForm1.twinName"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="替代品编号" prop="twinId">
-                <el-input v-model="ruleForm.twinId"></el-input>
+                <el-input v-model="ruleForm1.twinId"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="10">
             <el-col :span="8">
               <el-form-item label="生产周期（年）" label-width="150px" prop="lifecycle">
-                <el-input v-model="ruleForm.lifecycle"></el-input>
+                <el-input v-model="ruleForm1.lifecycle"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="单位" prop="amountUnit">
-                <el-input v-model="ruleForm.amountUnit"></el-input>
+                <el-input v-model="ruleForm1.amountUnit"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="产品经理" prop="responsiblePerson">
-                <el-input v-model="ruleForm.responsiblePerson"></el-input>
+                <el-input v-model="ruleForm1.responsiblePerson"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="10">
             <el-col :span="12">
               <el-form-item label="供应商集合" prop="providerGroup">
-                <el-input v-model="ruleForm.providerGroup"></el-input>
+                <el-input v-model="ruleForm1.providerGroup"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="产品描述" prop="productDescribe">
-                <el-input v-model="ruleForm.productDescribe"></el-input>
+                <el-input v-model="ruleForm1.productDescribe"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="10">
             <el-col :span="12">
               <el-form-item label="登记人" prop="register">
-                <el-input v-model="ruleForm.register"></el-input>
+                <el-input v-model="ruleForm1.register"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="建档时间" prop="registerTime">
-                <el-input v-model="ruleForm.registerTime"></el-input>
+                <el-input v-model="ruleForm1.registerTime"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -236,6 +236,7 @@
           dialog: false,
           loading: false,
           ruleForm: {},
+          ruleForm1: {},
           config:[],
           config1:[],
           config2:[],
@@ -260,20 +261,32 @@
               this.tableData = response.data;
             }).catch();
           },
+          getconfig1(){
+            var temp = this.config.find((item)=>{
+              return item.kindId==this.ruleForm1.firstKindId;
+            })
+            this.config1=temp.childConfig;
+          },
+          getconfig2(){
+            var temp = this.config1.find(item=>{
+              return item.kindId==this.ruleForm1.secondKindId;
+            })
+            this.config2 = temp.childConfig;
+          },
           fuhe(id){
             this.dialog = true
             var params = new URLSearchParams();
             params.append("id",id)
             this.$axios.post("queryById",params).then(response=>{
-              this.ruleForm = response.data;
+              this.ruleForm1 = response.data;
 
               var temp = this.config.find((item)=>{
-                return item.kindId==this.ruleForm.firstKindId;
+                return item.kindId==this.ruleForm1.firstKindId;
               })
               this.config1=temp.childConfig;
 
               var temp = this.config1.find(item=>{
-                return item.kindId==this.ruleForm.secondKindId;
+                return item.kindId==this.ruleForm1.secondKindId;
               })
               this.config2 = temp.childConfig;
             }).catch()
@@ -281,9 +294,9 @@
           btnsave(){
             this.dialog = false;
             var params = new FormData();
-            Object.keys(this.ruleForm).forEach(item=>{
-              if(this.ruleForm[item]!='' && this.ruleForm[item]!=null){
-                params.append(item,this.ruleForm[item]);
+            Object.keys(this.ruleForm1).forEach(item=>{
+              if(this.ruleForm1[item]!='' && this.ruleForm1[item]!=null){
+                params.append(item,this.ruleForm1[item]);
               }
             })
             this.$axios({
