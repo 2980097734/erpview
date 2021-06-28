@@ -33,7 +33,7 @@
         <el-table-column
           prop="productId"
           label="产品编号"
-          width="120">
+          width="150">
         </el-table-column>
         <el-table-column
           prop="productName"
@@ -88,21 +88,21 @@
             this.getdata();
         },
         auditing(row){
-          if (row.checkTag=="s001-0"){
+          if (row.checkTag=="0"){
             return "等待审核"
           }
-          if (row.checkTag=="s001-1"){
+          if (row.checkTag=="1"){
             return "审核通过"
           }
-          if (row.checkTag=="s001-2"){
+          if (row.checkTag=="2"){
             return "审核不通过"
           }
         },
         dispatching(row){
-          if (row.manufactureTag=="p001-0"){
+          if (row.manufactureTag=="0"){
             return "未派工"
           }
-          if (row.manufactureTag=="p001-1"){
+          if (row.manufactureTag=="1"){
             return "已派工"
           }
         }
