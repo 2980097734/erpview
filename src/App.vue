@@ -60,7 +60,13 @@
   import Product from "./components/Product";
   import Record from "./components/Record";
   import Applyregister from "./components/Applyregister";
-
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
+  import CustomizeTheInstallation from "./components/CustomizeTheInstallation";
+  import InventoryChanges from "./components/InventoryChanges";
+  import InventoryQuery from "./components/InventoryQuery";
+  import SafetyStockReview from "./components/SafetyStockReview";
+  import sc from "./components/sc";
 export default {
   name: 'app',
   data () {
@@ -120,7 +126,7 @@ export default {
     this.getmenudata();
   },
   components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister
+    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,Applyauditing,ApplySelect,CustomizeTheInstallation,InventoryChanges,InventoryQuery,SafetyStockReview,sc
   }
 }
 </script>
