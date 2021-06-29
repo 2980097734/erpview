@@ -60,6 +60,98 @@
   import Product from "./components/Product";
   import Record from "./components/Record";
   import Applyregister from "./components/Applyregister";
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
+  import CustomizeTheInstallation from "./components/CustomizeTheInstallation";
+  import InventoryChanges from "./components/InventoryChanges";
+  import InventoryQuery from "./components/InventoryQuery";
+  import SafetyStockReview from "./components/SafetyStockReview";
+  import sc from "./components/sc";
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
+  import CreateMaterial from "./components/CreateMaterial"
+  import wuliaoshenhe from "./components/wuliaoshenhe";
+  import wuliaochaxun from "./components/wuliaochaxun"
+  import wuliaogenggai from "./components/wuliaogenggai"
+  import AddDesignProcedure from "./components/AddDesignProcedure"
+  import CheckDesignProcedure from "./components/CheckDesignProcedure"
+  import EditDesignProcedure from "./components/EditDesignProcedure"
+  import QueryDesignProcedure from "./components/QueryDesignProcedure"
+  import AddDesignProcedureModule from "./components/AddDesignProcedureModule"
+  import CheckDesignProcedureModule from "./components/CheckDesignProcedureModule"
+  import EditDesignProcedureModule from "./components/EditDesignProcedureModule"
+  import QueryDesignProcedureModule from "./components/QueryDesignProcedureModule"
+  export default {
+    name: 'app',
+    data () {
+      return {
+        menutable:[],
+        editableTabsValue: '1',
+        editableTabs: [{   //tab选项卡显示的数据内容
+          title: '首页',
+          name: '1',
+          content: 'Welcome'
+        }],
+        tabIndex: 1   // 设置到name属性的值
+      };
+    },
+    methods:{
+      getmenudata(){
+        this.$axios.get("menu/queryAllmenu").then(response=>{
+          this.menutable = response.data;
+        }).catch();
+        this.$axios.post("menu/queryUser").then((response)=>{
+          var user = response.data;
+            sessionStorage.setItem("user",user);
+        })
+      },
+      addTab(titlename,linkUrl){
+        //判断当前页面是否存在
+        var tempobj = this.editableTabs.find(item=>{return item.title == titlename});
+        //存在
+        if(tempobj!=undefined){
+          console.log(tempobj.name)
+          this.editableTabsValue = tempobj.name;
+        }else{
+          let newTabName = ++this.tabIndex+'';
+          this.editableTabs.push({
+            title: titlename,
+            name: newTabName,
+            content: linkUrl
+          });
+          this.editableTabsValue = newTabName;
+        }
+      },
+      removeTab(targetName){
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
+        if(activeName==targetName){
+          tabs.forEach((tab,index)=>{
+            if(tab.name==targetName){
+              let nextTab = tabs[index+1] || tabs[index-1];
+              if(nextTab){
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab=>tab.name != targetName);
+      }
+    },
+    created() {
+      this.getmenudata();
+    },
+    components: {
+      Inventory,Manufactrue,Product,Welcome,CreateMaterial,Record,Applyregister,Applyauditing,ApplySelect,wuliaoshenhe,
+      wuliaochaxun,wuliaogenggai,AddDesignProcedure,CheckDesignProcedure,EditDesignProcedure,QueryDesignProcedure,
+      AddDesignProcedureModule,CheckDesignProcedureModule,EditDesignProcedureModule,QueryDesignProcedureModule
+    }
+  }
+  import ApplySelect from "./components/ApplySelect";
+  import Applyauditing from "./components/Applyauditing";
+  import DoManufacture from "./components/DoManufacture";
+  import Alteration from "./components/Alteration";
   import Recheck from "./components/Recheck";
   import ProductQuery from "./components/ProductQuery";
   import Alteration from "./components/Alteration";
@@ -126,8 +218,8 @@ export default {
     this.getmenudata();
   },
   components: {
-    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,
-    Recheck,ProductQuery,Alteration,Deletecs,Recover,Perdelete
+    Inventory,Manufactrue,Product,Welcome,Record,Applyregister,CustomizeTheInstallation,InventoryChanges,InventoryQuery,SafetyStockReview,Deletecs,Recover,Perdelete,
+    Recheck,ProductQuery,Alteration,ApplySelect,Applyauditing,DoManufacture
   }
 }
 </script>
