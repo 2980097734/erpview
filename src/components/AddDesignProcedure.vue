@@ -319,7 +319,7 @@
       },
       //获取所有分类信息
       getConfigFileKindList() {
-        this.$axios.post("/ProductMaterial/list").then((resp) => {
+        this.$axios.post("/configFileKind/list").then((resp) => {
           resp.data.forEach((item) => {
             if (item.kindLevel == 1)
               this.firstKindList.push(item)

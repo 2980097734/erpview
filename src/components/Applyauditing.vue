@@ -52,9 +52,6 @@
           <span>产品数量</span>
           <el-input style="width: 200px;" v-model="auditingData.amount"></el-input>
         </el-form-item>
-        <el-form-item label="设计人">
-          <el-input style="width: 200px;" v-model="auditingData.designer"></el-input>
-        </el-form-item>
         <el-form-item label="产品描述">
           <el-input v-model="auditingData.productDescribe"></el-input>
         </el-form-item>

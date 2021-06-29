@@ -403,7 +403,6 @@
                 type: 'danger'
               });
             }
-            this.getdata();
             _this.$forceUpdate();
           }).catch();
         }

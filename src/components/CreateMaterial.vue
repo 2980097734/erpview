@@ -445,6 +445,17 @@
           this.moduleData[0].designer=this.designer;
           this.moduleData[0].register=this.register;
           this.moduleData[0].registerTime=this.timeText;
+          this.moduleData.forEach((item)=>{
+            Object.keys(item).forEach((it)=>{
+              if (it==null){
+                it="";
+              }
+            /*item.forEach((it)=>{
+              if (it==null){
+                it="";
+              }*/
+            })
+          })
           this.$axios.post("ProductMaterial/addModule",JSON.stringify(this.moduleData),
             {headers:{"Content-Type":"application/json"}}).then((response)=>{
               this.$message({

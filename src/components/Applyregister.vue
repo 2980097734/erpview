@@ -1,122 +1,126 @@
 <template>
   <div id="Applyregister">
-    <!--<el-button type="primary" @click="addwinshow=true">添加新发生生产计划</el-button>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        fixed
-        prop="applyId"
-        label="生产计划编号"
-        width="150">
-      </el-table-column>
-      <el-table-column
-        prop="productId"
-        label="产品编号"
-        width="150">
-      </el-table-column>
-      <el-table-column
-        prop="productName"
-        label="产品名称"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="amount"
-        label="数量"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="checkTag"
-        label="审核标志"
-        width="120"
-        :formatter="auditing">
-      </el-table-column>
-      <el-table-column
-        prop="manufactureTag"
-        label="派工标志"
-        width="300"
-        :formatter="dispatching">
-      </el-table-column>
-    </el-table>-->
-    <span>新发生生产计划登记</span><br/>
+    <el-button type="primary" @click="addwinshow=true">添加新发生生产计划</el-button>
+    <el-form label-width="80px" :modal="addform">
+      <el-form-item label="编号" hidden>
+        <el-input v-model="addform.id"></el-input>
+      </el-form-item>
+      <el-form-item label="产品编号">
+        <el-input style="width: 200px" v-model="addform.productId"></el-input>
+      </el-form-item>
+      <el-form-item label="产品名称">
+        <el-input style="width: 200px" v-model="addform.productName"></el-input>
+        <span>产品数量</span>
+        <el-input style="width: 200px" v-model="addform.amount"></el-input>
+      </el-form-item>
+      <el-form-item label="产品类型">
+        <el-input v-model="addform.type"></el-input>
+      </el-form-item>
+      <el-form-item label="备注">
+        <el-input v-model="addform.remark"></el-input>
+      </el-form-item>
+      <el-form-item label="登记人">
+        <el-input style="width: 200px" v-model="addform.register"></el-input>
+        <span>登记时间</span>
+        <el-date-picker
+          v-model="addform.registerTime"
+          style="width: 200px"
+          type="datetime"
+          dataformatas="yyyy-MM-dd">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="复核人" hidden>
+        <el-input style="width: 200px" v-model="addform.checker"></el-input>
+      </el-form-item>
+      <el-form-item label="审核意见" hidden>
+        <el-input v-model="addform.checkSuggestion"></el-input>
+      </el-form-item>
+      <el-form-item label="审核时间" hidden>
+        <el-date-picker
+          v-model="addform.checkTime"
+          type="datetime"
+          dataformatas="yyyy-MM-dd">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="审核标志" hidden>
+        <el-select style="width: 200px;" v-model="addform.checkTag" placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        <span>派工标志</span>
+        <el-select style="width: 200px" v-model="addform.manufactureTag" placeholder="请选择">
+          <el-option
+            v-for="item in options2"
+            :key="item.value2"
+            :label="item.label2"
+            :value="item.value2">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <!--        <el-form-item label="派工标志">-->
+      <!--          -->
+      <!--        </el-form-item>-->
+    </el-form>
+
+    <el-button type="primary" @click="btnadd">确 定</el-button>
     <!--  添加动态模态框-->
-    <!--<el-dialog title="新发生生产计划添加" :visible="addwinshow">-->
-      <el-form label-width="80px" :modal="addform">
-        <el-form-item label="编号" hidden>
-          <el-input v-model="addform.id"></el-input>
-        </el-form-item>
-        <el-form-item label="产品编号">
-          <el-input style="width: 200px" v-model="addform.productId"></el-input>
-        </el-form-item>
-        <el-form-item label="产品名称">
-          <el-input style="width: 200px" v-model="addform.productName"></el-input>
-          <span>产品数量</span>
-          <el-input style="width: 200px" v-model="addform.amount"></el-input>
-        </el-form-item>
-        <el-form-item label="设计人">
-          <el-input style="width: 200px;" v-model="addform.designer"></el-input>
-        </el-form-item>
-        <el-form-item label="产品描述">
-          <el-input v-model="addform.productDescribe"></el-input>
-        </el-form-item>
-        <el-form-item label="产品类型">
-          <el-input v-model="addform.type"></el-input>
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="addform.remark"></el-input>
-        </el-form-item>
-        <el-form-item label="登记人">
-          <el-input style="width: 200px" v-model="addform.register"></el-input>
-          <span>登记时间</span>
-          <el-date-picker
-            v-model="addform.registerTime"
-            style="width: 200px"
-            type="datetime"
-            dataformatas="yyyy-MM-dd">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="复核人" hidden>
-          <el-input style="width: 200px" v-model="addform.checker"></el-input>
-        </el-form-item>
-        <el-form-item label="审核意见" hidden>
-          <el-input v-model="addform.checkSuggestion"></el-input>
-        </el-form-item>
-        <el-form-item label="审核时间" hidden>
-          <el-date-picker
-            v-model="addform.checkTime"
-            type="datetime"
-            dataformatas="yyyy-MM-dd">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="审核标志" hidden>
-          <el-select style="width: 200px;" v-model="addform.checkTag" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <span>派工标志</span>
-          <el-select style="width: 200px" v-model="addform.manufactureTag" placeholder="请选择">
-            <el-option
-              v-for="item in options2"
-              :key="item.value2"
-              :label="item.label2"
-              :value="item.value2">
-            </el-option>
-          </el-select>
-        </el-form-item>
-<!--        <el-form-item label="派工标志">-->
-<!--          -->
-<!--        </el-form-item>-->
-      </el-form>
+    <el-dialog title="新发生生产计划添加" :visible="addwinshow">
+      <el-table :data="tableData">
+        <el-table-column
+          prop="productId"
+          label="产品编号"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          prop="productName"
+          label="产品名称"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          prop="productClass"
+          label="档次级别"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          prop="firstKindName"
+          label="I级分类"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          prop="secondKindName"
+          label="II级分类"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          prop="thirdKindName"
+          label="III级分类"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          label="用途分类"
+          prop="type"
+          :formatter="typeFormatter"
+          width="140">
+        </el-table-column>
+        <el-table-column
+          label="生产"
+          width="140">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.row)">生产</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addwinshow = false">取 消</el-button>
-        <el-button type="primary" @click="btnadd">确 定</el-button>
+
       </div>
-    <!--</el-dialog>-->
+    </el-dialog>
 
   </div>
 </template>
@@ -168,10 +172,16 @@
     },
     methods:{
       getApplyData(){
-          this.$axios.get("queryFile.action").then((response)=>{
+          this.$axios.get("selectAllFile.action").then((response)=>{
             this.tableData = response.data;
           }).catch();
         },
+      typeFormatter(row){
+        return row.type=="1"?"商品":"物料";
+      },
+      handleEdit(row){
+        this.addform=row;
+      },
       auditing(row){
           if (row.checkTag=="0"){
             return "等待审核"

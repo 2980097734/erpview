@@ -285,7 +285,7 @@
           this.getdata();
         },
         handleClose(done) {
-          this.$confirm('还有未保存的工作哦确定关闭吗？')
+          this.$confirm('确定关闭吗？')
             .then(_ => {
               done();
             })
@@ -302,15 +302,6 @@
         rowClass({row, rowIndex}) {
           console.log(rowIndex) //表头行标号为0
           return 'background:red'
-        },
-        //设置指定行、列、具体单元格颜色
-        cellStyle({row, column, rowIndex, columnIndex}) {
-          var arr=[4,5,6];
-          for (var i=0;i<arr.length;i++){
-            if (columnIndex === arr[i]) { //指定坐标rowIndex ：行，columnIndex ：列
-              return 'background:yellow' //rgb(105,0,7)
-            }
-          }
         },
         //显示隐藏
         showHidden(){
@@ -402,7 +393,6 @@
                 type: 'danger'
               });
             }
-            this.getdata();
             _this.$forceUpdate();
           }).catch();
         }
@@ -445,7 +435,7 @@
     width: 83%;
   }
   .yanse{
-    background-color:yellow;
+    background-color:blue;
   }
   .div03{
     position: absolute;
