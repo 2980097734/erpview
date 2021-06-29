@@ -159,15 +159,15 @@
               </el-col>
               <el-col :span="8">
                 <el-form-item label="用途类型">
-                  <span v-if="ruleForm1.type=='Y001-1'">商品</span>
-                  <span v-if="ruleForm1.type=='Y001-2'">物料</span>
+                  <span v-if="ruleForm1.type=='1'">商品</span>
+                  <span v-if="ruleForm1.type=='2'">物料</span>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="档次级别" prop="productClass">
-                  <span v-if="ruleForm1.productClass=='D001-1'">高档</span>
-                  <span v-if="ruleForm1.productClass=='D001-2'">中档</span>
-                  <span v-if="ruleForm1.productClass=='D001-3'">低档</span>
+                  <span v-if="ruleForm1.productClass=='1'">高档</span>
+                  <span v-if="ruleForm1.productClass=='2'">中档</span>
+                  <span v-if="ruleForm1.productClass=='3'">低档</span>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -274,11 +274,11 @@
           config:[],
           config1:[],
           config2:[],
-          types:[{'value':'Y001-1','lable':'商品'},
-            {'value':'Y001-2','lable':'物料'}],
-          productclass:[{'value':'D001-1','lable':'高档'},
-            {'value':'D001-2','lable':'中档'},
-            {'value':'D001-3','lable':'低档'}]
+          types:[{'value':'1','lable':'商品'},
+            {'value':'2','lable':'物料'}],
+          productclass:[{'value':'1','lable':'高档'},
+            {'value':'2','lable':'中档'},
+            {'value':'3','lable':'低档'}]
         };
       },
       methods: {
@@ -320,20 +320,20 @@
           }).catch()
         },
         typeName(row){
-          if(row.type=="Y001-1"){
+          if(row.type=="1"){
             return "商品";
-          }else if(row.type=="Y001-2"){
+          }else if(row.type=="2"){
             return "物料";
           }else{
             return "";
           }
         },
         productName(row){
-          if(row.productClass=="D001-1"){
+          if(row.productClass=="1"){
             return "高档";
-          }else if(row.productClass=="D001-2"){
+          }else if(row.productClass=="2"){
             return "中档";
-          }else if(row.productClass=="D001-3"){
+          }else if(row.productClass=="3"){
             return "低档";
           }else{
             return "";
