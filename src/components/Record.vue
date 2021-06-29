@@ -185,11 +185,11 @@
                 listPrice:[{required: true,message:'请填入市场单价',trigger:'blur'}],
                 costPrice:[{required: true,message:'请填入计划成本单价',trigger:'blur'}]
               },
-              types:[{'value':'Y001-1','lable':'商品'},
-                {'value':'Y001-2','lable':'物料'}],
-              productclass:[{'value':'D001-1','lable':'高档'},
-                {'value':'D001-2','lable':'中档'},
-                {'value':'D001-3','lable':'低档'}]
+              types:[{'value':'1','lable':'商品'},
+                {'value':'2','lable':'物料'}],
+              productclass:[{'value':'1','lable':'高档'},
+                {'value':'2','lable':'中档'},
+                {'value':'3','lable':'低档'}]
             };
 
           },
@@ -250,7 +250,6 @@
               });
             },
             resetForm(ruleForm){
-             // this.$refs[ruleForm].resetFields();
               Object.keys(this.ruleForm).forEach(item=>{
                this.ruleForm[item]="";
               })
@@ -258,11 +257,8 @@
           },
           created(){
             this.getdataConfig();
-           // this.dateRule;
           }
         }
       </script>
-
 <style scoped>
-
 </style>

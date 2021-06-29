@@ -63,6 +63,9 @@
   import Recheck from "./components/Recheck";
   import ProductQuery from "./components/ProductQuery";
   import Alteration from "./components/Alteration";
+  import Deletecs from "./components/Deletecs";
+  import Recover from "./components/Recover";
+  import Perdelete from "./components/Perdelete";
 
 export default {
   name: 'app',
@@ -124,7 +127,7 @@ export default {
   },
   components: {
     Inventory,Manufactrue,Product,Welcome,Record,Applyregister,
-    Recheck,ProductQuery,Alteration
+    Recheck,ProductQuery,Alteration,Deletecs,Recover,Perdelete
   }
 }
 </script>

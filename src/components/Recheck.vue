@@ -248,11 +248,11 @@
             listPrice:[{required: true,message:'请填入市场单价',trigger:'blur'}],
             costPrice:[{required: true,message:'请填入计划成本单价',trigger:'blur'}]
           },
-          types:[{'value':'Y001-1','lable':'商品'},
-            {'value':'Y001-2','lable':'物料'}],
-          productclass:[{'value':'D001-1','lable':'高档'},
-            {'value':'D001-2','lable':'中档'},
-            {'value':'D001-3','lable':'低档'}]
+          types:[{'value':'1','lable':'商品'},
+            {'value':'2','lable':'物料'}],
+          productclass:[{'value':'1','lable':'高档'},
+            {'value':'2','lable':'中档'},
+            {'value':'3','lable':'低档'}]
         };
       },
       methods:{
@@ -329,9 +329,9 @@
             }).catch();
           },
           typeName(row){
-            if(row.type=="Y001-1"){
+            if(row.type=="1"){
               return "商品";
-            }else if(row.type=="Y001-2"){
+            }else if(row.type=="2"){
               return "物料";
             }else{
               return "";
